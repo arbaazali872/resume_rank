@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from resume_manager import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('', views.upload_resume, name='upload_resume'),
+    path('results/<uuid:session_id>/', views.rank_results, name='rank_results'),
+    path('upload/', views.simple_file_upload, name='simple_file_upload'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Resume</title>
+</head>
+<body>
+    <h1>Upload Job Description and Resumes1</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ jd_form.as_p }}
+        {{ resume_form.as_p }}
+        <button type="submit">Submit</button>
+        
+        <!-- <p><input type="submit" value="Upload" /></p> -->
+    </form>
+</body>
+</html>
