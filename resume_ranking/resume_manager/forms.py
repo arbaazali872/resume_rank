@@ -3,9 +3,17 @@ from django import forms
 from .models import JobDescription,Resume
 
 class JobDescriptionForm(forms.ModelForm):
+    MODEL_CHOICES = [
+        ('tfidf', 'TF/IDF'),
+        ('doc2vec', 'Doc2Vec'),
+        ('bert', 'BERT'),
+    ]
+    
+    model_choice = forms.ChoiceField(choices=MODEL_CHOICES, label="Select Ranking Model")
+
     class Meta:
         model = JobDescription
-        fields = ['description']
+        fields = ['description', 'model_choice']
 
 
 # forms.py

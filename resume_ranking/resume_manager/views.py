@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from .forms import JobDescriptionForm, ResumeForm, SimpleFileUploadForm
 from .models import JobDescription, Resume, RankingResult
+from .utils import rank_resumes
 import uuid
 import os
 import os
@@ -41,6 +42,9 @@ def upload_resume(request):
             session_id = uuid.uuid4()
             jd.session_id = session_id
             # print(jd.)
+            # Get the selected model from the form
+            model_choice = jd_form.cleaned_data['model_choice']
+            print("model_choice",model_choice)
             jd.save()
             # print(f"Files: {files}")  # Debugging print statement
             
@@ -50,7 +54,7 @@ def upload_resume(request):
                 Resume.objects.create(session_id=session_id, file=file)
             
             # Process and rank resumes in the background
-            # rank_resumes(session_id)
+            rank_resumes(session_id, model_choice)
             
             return redirect('rank_results', session_id=session_id)
     else:
