@@ -4,10 +4,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import textract
 from pdfminer.high_level import extract_text
+from transformers import BertTokenizer, BertModel
+import torch
 import os
 from django.conf import settings
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 def rank_resumes(session_id,model_choice):
     jd = JobDescription.objects.get(session_id=session_id)
@@ -117,8 +120,46 @@ def rank_using_doc2vec(jd, resumes):
 
 
 def rank_using_bert(jd, resumes):
-    # Implement the ranking logic using BERT
-    pass
+    jd_text = jd.description
+    resume_texts = []
+    resume_files = []
+
+    for resume in resumes:
+        file_path = os.path.join(settings.MEDIA_ROOT, resume.file.name)
+        text = extract_text_from_file(file_path)
+        resume_texts.append(text)
+        resume_files.append(resume.file.name)
+
+    # Load pre-trained BERT model and tokenizer
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    model = BertModel.from_pretrained('bert-base-uncased')
+
+    # Encode the job description
+    jd_encoding = tokenizer(jd_text, return_tensors='pt', padding=True, truncation=True, max_length=512)
+    jd_output = model(**jd_encoding)
+    jd_vector = jd_output.last_hidden_state.mean(dim=1).detach().numpy()
+
+    resume_vectors = []
+    for text in resume_texts:
+        resume_encoding = tokenizer(text, return_tensors='pt', padding=True, truncation=True, max_length=512)
+        resume_output = model(**resume_encoding)
+        resume_vector = resume_output.last_hidden_state.mean(dim=1).detach().numpy()
+        resume_vectors.append(resume_vector)
+
+    # Convert resume_vectors to 2D array
+    resume_vectors = np.vstack(resume_vectors)
+
+    # Calculate similarities
+    scores = cosine_similarity(jd_vector, resume_vectors).flatten()
+
+    ranked_resumes = sorted(zip(scores, resume_files), reverse=True)
+
+    # Save the results in the database
+    for score, file_name in ranked_resumes:
+        resume = resumes.get(file=file_name)
+        RankingResult.objects.create(session_id=jd.session_id, resume=resume, score=score)
+    print(f"Ranked Resumes scores are: {ranked_resumes}")
+    return ranked_resumes
 
 
 def calculate_similarity(jd_text, resume_path):
