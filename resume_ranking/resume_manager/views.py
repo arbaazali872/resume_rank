@@ -60,7 +60,7 @@ def upload_resume(request):
     else:
         jd_form = JobDescriptionForm()
         resume_form = ResumeForm()
-    return render(request, 'resume_manager/upload_resumes.html', {'jd_form': jd_form, 'resume_form': resume_form})
+    return render(request, 'resume_manager/upload_resumes_.html', {'jd_form': jd_form, 'resume_form': resume_form})
 
 def rank_results(request, session_id):
     results = RankingResult.objects.filter(session_id=session_id).order_by('-score')

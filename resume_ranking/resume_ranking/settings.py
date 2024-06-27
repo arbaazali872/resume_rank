@@ -74,17 +74,26 @@ WSGI_APPLICATION = 'resume_ranking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'local_resume_rank',
+#         'USER': 'admin',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'local_resume_rank',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '5435',
+        'NAME': os.getenv('SQL_DATABASE', 'local_resume_rank'),
+        'USER': os.getenv('SQL_USER', 'admin'),
+        'PASSWORD': os.getenv('SQL_PASSWORD', 'admin'),
+        'HOST': os.getenv('SQL_HOST', 'db'),
+        'PORT': os.getenv('SQL_PORT', '5432'),
     }
 }
-
 
 
 # Password validation
@@ -132,6 +141,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,"static")
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
