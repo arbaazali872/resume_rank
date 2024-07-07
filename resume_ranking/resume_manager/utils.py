@@ -51,8 +51,8 @@ def rank_using_tfidf(jd, resumes):
     resume_files = []
 
     for resume in resumes:
-        file_name=resume.file.name
-        file_name= f'' + file_name[1:]
+        # file_name=resume.file.name
+        # file_name= f'' + file_name[1:]
         file_path = os.path.join(settings.MEDIA_ROOT, resume.file.name)
         
         text = extract_text_from_file(file_path)
