@@ -1,0 +1,15 @@
+<!-- templates/resumes/rank_results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ranked Resumes</title>
+</head>
+<body>
+    <h1>Ranked Resumes</h1>
+    <ol>
+        {% for result in results %}
+            <li>{{ result.resume.file.name }} - Score: {{ result.score }}</li>
+        {% endfor %}
+    </ol>
+</body>
+</html>
