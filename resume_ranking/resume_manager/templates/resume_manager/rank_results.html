@@ -1,15 +1,100 @@
-<!-- templates/resumes/rank_results.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Ranked Resumes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #6a64f1;
+            color: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li:nth-child(even) {
+            background: #7a74ff;
+        }
+
+        .resume-name {
+            font-weight: bold;
+            margin-right: 10px; /* Adjust spacing between name and score */
+        }
+
+        .score {
+            background: #fff;
+            color: #6a64f1;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .main-page-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #6a64f1;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .main-page-button:hover {
+            background-color: #7a74ff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Ranked Resumes</h1>
-    <ol>
-        {% for result in results %}
-            <li>{{ result.resume.file.name }} - Score: {{ result.score }}</li>
-        {% endfor %}
-    </ol>
+    <div class="container">
+        <h1>Ranked Resumes</h1>
+        <ol>
+            {% for result in results %}
+                <li>
+                    <span class="resume-name">{{ result.resume.file.name }}</span>
+                    <span class="score">{{ result.score|floatformat:"2" }}</span>
+                </li>
+            {% endfor %}
+        </ol>
+        <div class="button-container">
+            <a href="{% url 'upload_resume' %}" class="main-page-button">Return to Main Page</a>
+        </div>
+    </div>
 </body>
 </html>
