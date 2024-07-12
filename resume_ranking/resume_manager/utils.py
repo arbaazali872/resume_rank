@@ -162,8 +162,3 @@ def rank_using_bert(jd, resumes):
     return ranked_resumes
 
 
-def calculate_similarity(jd_text, resume_path):
-    with open(resume_path, 'r') as f:
-        resume_text = f.read()
-    score = len(set(jd_text.split()) & set(resume_text.split()))
-    return score
