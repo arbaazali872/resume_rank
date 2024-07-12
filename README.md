@@ -26,7 +26,7 @@ A Resume ranking system based on comparing the JD with the text provided in the 
 | **Computation Time**    | Low                                  | Moderate                           | High                                 |
 
 
-![project_videoonline-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/90b1c662-cc2d-40d5-9e2e-b8bfa54e9200)
+https://github.com/user-attachments/assets/db7736ca-22bb-453a-a9ba-2f008006290d
 
 
 ## **Getting Started**
