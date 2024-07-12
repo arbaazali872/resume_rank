@@ -37,17 +37,23 @@ Follow these steps to get the Resume Ranking System up and running:
 
 
 Windows:
+
 `python -m venv env`
+
 `env\Scripts\activate`
 
 
 Linux:
+
 `sudo apt install python3-venv`
+
 `python3 -m venv env`
+
 `source env/bin/activate`
 
 
 - Go to the main repository
+
 `cd resume_ranking`
 
 - Make the required changes in the .env file based on your PostgreSql credentials.
