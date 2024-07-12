@@ -25,6 +25,10 @@ A Resume ranking system based on comparing the JD with the text provided in the 
 | **Accuracy**            | Moderate                             | High                               | Very High                            |
 | **Computation Time**    | Low                                  | Moderate                           | High                                 |
 
+
+![project_videoonline-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/90b1c662-cc2d-40d5-9e2e-b8bfa54e9200)
+
+
 ## **Getting Started**
 
 Follow these steps to get the Resume Ranking System up and running:
