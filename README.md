@@ -25,6 +25,10 @@ A Resume ranking system based on comparing the JD with the text provided in the 
 | **Accuracy**            | Moderate                             | High                               | Very High                            |
 | **Computation Time**    | Low                                  | Moderate                           | High                                 |
 
+
+https://github.com/user-attachments/assets/db7736ca-22bb-453a-a9ba-2f008006290d
+
+
 ## **Getting Started**
 
 Follow these steps to get the Resume Ranking System up and running:
