@@ -60,6 +60,10 @@ Linux:
 
 `cd resume_ranking`
 
+- Install all dependencies
+
+`pip install -r requirements.txt`
+
 - Make the required changes in the .env file based on your PostgreSql credentials.
 
 - Run the command:
